@@ -1,0 +1,30 @@
+{
+  "name": "contact-express",
+  "version": "1.0.0",
+  "description": "Contact Info Store App",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev" : "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riyanhossain/contact-express-app.git"
+  },
+  "author": "m3rab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/riyanhossain/contact-express-app/issues"
+  },
+  "homepage": "https://github.com/riyanhossain/contact-express-app#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

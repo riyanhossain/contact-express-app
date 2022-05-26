@@ -1,8 +1,12 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
 const connect = require('./dbConnect/dbConnect');
 const { notFound, errorHandler } = require('./errorMidleware');
+const contactRoute = require('./Routes/contactRoute');
+
+
+
+const app = express();
 
 //External middleware
 app.use(cors());
@@ -15,6 +19,9 @@ connect();
 app.use(express.json());
 
 // Routes
+app.use('/api', contactRoute);
+
+// server route
 app.get('/', (req, res) => {
     res.send(`Server is running on port ${process.env.PORT}`);
 })

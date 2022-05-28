@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const connect = require('./dbConnect/dbConnect');
-const { notFound, errorHandler } = require('./errorMidleware');
+const { notFound, errorHandler } = require('./Middleware/errorMidleware');
 const contactRoute = require('./Routes/contactRoute');
+const path = require('path');
 
 
 
@@ -17,6 +18,8 @@ connect();
 
 // Internal middleware
 app.use(express.json());
+app.use( express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 // Routes
 app.use('/api', contactRoute);

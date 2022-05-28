@@ -4,6 +4,8 @@ const connect = require('./dbConnect/dbConnect');
 const { notFound, errorHandler } = require('./Middleware/errorMidleware');
 const contactRoute = require('./Routes/contactRoute');
 const path = require('path');
+const adminRoute = require('./Routes/adminRoute');
+const createAdmin = require('./utilities/createAdmin');
 
 
 
@@ -16,6 +18,9 @@ require('dotenv').config();
 //connect to db
 connect();
 
+//creating admin
+createAdmin();
+
 // Internal middleware
 app.use(express.json());
 app.use( express.urlencoded({ extended: true }));
@@ -23,6 +28,7 @@ app.use(express.static('public'));
 
 // Routes
 app.use('/api', contactRoute);
+app.use('/api', adminRoute);
 
 // server route
 app.get('/', (req, res) => {

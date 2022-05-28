@@ -1,4 +1,5 @@
 const contact = require("../Models/contacts");
+const fs = require("fs");
 
 const postContacts =  async (req, res) => {
     const newUrl = new URL(`${req.protocol}://${req.get('host')}`);
@@ -14,6 +15,7 @@ const postContacts =  async (req, res) => {
             birthDate : req.body.birthDate,
             fbIdLink : req.body.fbIdLink,
             avatar : newUrl.origin +'/uploads/' + req.file.filename,
+            fileName : req.file.filename
         });
         await newContact.save();
         res.status(200).json({
@@ -60,4 +62,27 @@ const getContacts = async (req, res) => {
     }
   }
 
-module.exports = { postContacts , getContacts};
+  const deleteContacts = async (req, res) => {
+    try {
+      const contacts = await contact.findByIdAndDelete(req.params.id);
+      if (!contacts) {
+       
+        res.status(404).json({
+          message: "Contact not found",
+          
+        });
+
+      } else {
+        fs.unlinkSync(`public/uploads/${contacts.fileName}`);
+        res.status(200).json({
+          message: "Contact deleted successfully",
+        });
+      }
+    } catch (err) {
+      res.status(500).json({
+        message: err.message,
+      });
+    }
+  }
+
+module.exports = { postContacts , getContacts, deleteContacts};

@@ -52,6 +52,10 @@ const contactSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  fileName:{
+    type: String,
+    required: true,
+  }
 });
 
 contactSchema.plugin(mongoosePaginate);

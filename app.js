@@ -6,6 +6,7 @@ const contactRoute = require('./Routes/contactRoute');
 const path = require('path');
 const adminRoute = require('./Routes/adminRoute');
 const createAdmin = require('./utilities/createAdmin');
+const searchRoute = require('./Routes/searchRoute');
 
 
 
@@ -29,6 +30,7 @@ app.use(express.static('public'));
 // Routes
 app.use('/api', contactRoute);
 app.use('/api', adminRoute);
+app.use('/api', searchRoute);
 
 // server route
 app.get('/', (req, res) => {

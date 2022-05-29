@@ -84,7 +84,6 @@ const deleteContacts = async (req, res) => {
 
 const updateContacts = async (req, res) => {
   const newUrl = new URL(`${req.protocol}://${req.get("host")}`);
-  console.log(req.file, req.body, newUrl);
   try {
     req.body.avatar = newUrl.origin + "/uploads/" + req.file.filename;
     req.body.fileName = req.file.filename;

@@ -9,10 +9,3 @@
   min-height: 100vh !important;
   width: 100%;
 }
-body {
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-html{
-  scroll-behavior: smooth;
-}

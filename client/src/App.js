@@ -1,22 +1,19 @@
-import './App.css';
-import {useEffect, useState} from 'react';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home/Home";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 
 function App() {
-  const [contacts, setContacts] = useState([]);
-  useEffect( () => {
-    fetch('http://localhost:5000/api/contacts')
-    .then(res => res.json())
-    .then(data => setContacts(data.contacts))
-  },[])
-  console.log(contacts);
   return (
-    <div className="App">
-      <h1>Email</h1>
-      {
-        contacts.map(contact => (
-          <img src={contact.avatar} alt="" />
-        ))
-      }
+    <div className="App flex flex-col items-center justify-between">
+      <Navbar />
+      <Routes>
+
+        <Route path="/" element={<Home />} />
+
+      </Routes>
+      <Footer />
     </div>
   );
 }

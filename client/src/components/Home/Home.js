@@ -13,7 +13,7 @@ function Home() {
       </section>
       <section className="w-4/6 flex flex-wrap justify-center gap-6 ">
         {
-          arr.map(item => <Cards />)
+          arr.map(item => <Cards key={item}/>)
         }
       </section>
     </main>

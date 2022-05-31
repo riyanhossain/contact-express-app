@@ -1,7 +1,6 @@
 import React from "react";
 import { CgMail } from "react-icons/cg";
 import { MdPhone } from "react-icons/md";
-import { Link } from "react-router-dom";
 import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 
 function Cards(props) {
@@ -20,7 +19,9 @@ function Cards(props) {
             <li className="flex gap-x-1 justify-center items-center">
               <p className="font-myfont text-sm text-[#2825D1] font-medium">
                 Riyan Hossain,{" "}
-                <span className="text-xs italic font-myfont">Software Engineer</span>
+                <span className="text-xs italic font-myfont">
+                  Software Engineer
+                </span>
               </p>
             </li>
             <li className="flex gap-x-1 justify-center items-center">
@@ -51,15 +52,27 @@ function Cards(props) {
           </p>
         </div>
         <div className="flex gap-x-4 bg-[#2825D1] w-full p-3 justify-center items-center">
-          <Link to="#">
+          <a
+            href="https://www.facebook.com/riyan.hossain.9"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <BsFacebook className="text-white" />
-          </Link>
-          <Link to="riyan@gmail.com">
+          </a>
+          <a
+            href="https://www.facebook.com/riyan.hossain.9"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <BsInstagram className="text-white" />
-          </Link>
-          <Link to="#">
+          </a>
+          <a
+            href="https://www.facebook.com/riyan.hossain.9"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <BsTwitter className="text-white" />
-          </Link>
+          </a>
         </div>
       </div>
     </div>

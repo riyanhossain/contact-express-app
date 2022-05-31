@@ -13,14 +13,14 @@ function Navbar() {
             <input type="text" className='border-0 outline-0 text-center text-blue-900 font-tailfont font-semibold w-24 md:w-48 lg:w-64'/>
             <input type="button" value="Search" className='w-16 h-full bg-white text-blue-800 font-tailfont font-bold outline-0' />
           </li>
-          <li className='flex'>
+          <ul className='flex'>
             <li className='p-4 text-white font-tailfont'>
               <Link to='/admin'> Admin </Link>
             </li>
             <li className='hidden p-4  text-white font-tailfont  md:block lg:block'>
               <Link to='/'> Home </Link>
             </li>
-          </li>
+          </ul>
         </ul>
       </nav>
     </section>

@@ -4,19 +4,9 @@ const fs = require("fs");
 const postContacts = async (req, res) => {
   const newUrl = new URL(`${req.protocol}://${req.get("host")}`);
   try {
-    const newContact = new contact({
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      location: req.body.location,
-      occupation: req.body.occupation,
-      permission: req.body.permission,
-      bloodGroup: req.body.bloodGroup,
-      birthDate: req.body.birthDate,
-      fbIdLink: req.body.fbIdLink,
-      avatar: newUrl.origin + "/uploads/" + req.file.filename,
-      fileName: req.file.filename,
-    });
+    req.body.avatar = newUrl.origin + "/uploads/" + req.file.filename;
+    req.body.fileName = req.file.filename;
+    const newContact = new contact(req.body);
     await newContact.save();
     res.status(200).json({
       message: "Contact added successfully",

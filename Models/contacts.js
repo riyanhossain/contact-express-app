@@ -39,12 +39,19 @@ const contactSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  bloodGroup: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
-  birthDate: {
-    type: Date,
+  fbIdLink: {
+    type: String,
     required: true,
   },
-  fbIdLink: {
+  igIdLink: {
+    type: String,
+    required: true,
+  },
+  twIdLink: {
+    type: String,
+    required: true,
+  },
+  quote: {
     type: String,
     required: true,
   },

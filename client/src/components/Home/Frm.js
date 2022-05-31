@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Alert, Button, message, Modal } from 'antd';
 
 function Frm() {
-  const [form, setForm] = useState({})
+  const navigate = useNavigate();
+  const [form, setForm] = useState({});
   const [selectedImage, setSelectedImage] = useState();
 
   const uploadImage = (e) => {
     setSelectedImage(e.target.files[0]);
     form.avatar = e.target.files[0];
     console.log(selectedImage);
-  }
+  };
   const handleInputs = (e) => {
-    form.permission = false;
+    form.permission = true;
     setForm({
       ...form,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const formdata = new FormData();
@@ -32,7 +35,7 @@ function Frm() {
     formdata.append("quote", form.quote);
     formdata.append("permission", form.permission);
 
-    console.log(formdata);
+    console.log(form);
     axios
       .post("http://localhost:5000/api/contacts", formdata, {
         headers: {
@@ -45,12 +48,30 @@ function Frm() {
       .catch((err) => {
         console.log(err);
       });
-  }
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      location: "",
+      avatar: "",
+      igIdLink: "",
+      fbIdLink: "",
+      twIdLink: "",
+      occupation: "",
+      quote: "",
+      permission: "",
+    });
+
+  };
+  const success = () => {
+    message.success('Contact added successfully');
+  };
   return (
     <div className="h-[30rem] w-72 flex flex-col gap-2 justify-center items-center bg-[#070556] mb-6 md:w-96">
       <p className="font-bold text-white font-myfont">Add Contact</p>
       <form
-      onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
+        onSubmitCapture={()=>success()}
         className="w-11/12 flex flex-col gap-y-2"
         encType="multipart/form-data"
       >
@@ -69,6 +90,7 @@ function Frm() {
           placeholder="name"
           name="name"
           onChange={handleInputs}
+          value={form.name}
           required
         />
         <input
@@ -77,6 +99,7 @@ function Frm() {
           placeholder="occupation"
           name="occupation"
           onChange={handleInputs}
+          value={form.occupation}
           required
         />
         <input
@@ -85,6 +108,7 @@ function Frm() {
           placeholder="email"
           name="email"
           onChange={handleInputs}
+          value={form.email}
           required
         />
         <input
@@ -93,6 +117,7 @@ function Frm() {
           placeholder="phone"
           name="phone"
           onChange={handleInputs}
+          value={form.phone}
           required
         />
         <input
@@ -101,30 +126,34 @@ function Frm() {
           placeholder="current location"
           name="location"
           onChange={handleInputs}
+          value={form.location}
           required
         />
         <input
           type="text"
           className="font-myfont text-[#2825D1] outline-cyan-400 w-full placeholder:italic"
-          placeholder="Facebook username"
-          name="facebook"
+          placeholder="Facebook link"
+          name="fbIdLink"
           onChange={handleInputs}
+          value={form.fbIdLink}
           required
         />
         <input
           type="text"
           className="font-myfont text-[#2825D1] outline-cyan-400 w-full placeholder:italic"
-          placeholder="Instagram username"
-          name="instagram"
+          placeholder="Instagram link"
+          name="igIdLink"
           onChange={handleInputs}
+          value={form.igIdLink}
           required
         />
         <input
           type="text"
           className="font-myfont text-[#2825D1] outline-cyan-400 w-full placeholder:italic"
-          placeholder="twitter username"
-          name="twitter"
+          placeholder="twitter link"
+          name="twIdLink"
           onChange={handleInputs}
+          value={form.twIdLink}
           required
         />
         <textarea
@@ -133,6 +162,7 @@ function Frm() {
           rows={4}
           className="text-sm font-myfont text-[#2825D1] w-full outline-cyan-400"
           onChange={handleInputs}
+          value={form.quote}
           required
         />
         <input

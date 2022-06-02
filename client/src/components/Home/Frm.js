@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Alert, Button, message, Modal } from 'antd';
+import { Message, toaster } from 'rsuite';
+import 'rsuite/dist/rsuite.min.css';
+
+
 
 function Frm() {
-  const navigate = useNavigate();
+  const [type, setType] = React.useState('success');
+  const [placement, setPlacement] = React.useState('topCenter');
+
   const [form, setForm] = useState({});
   const [selectedImage, setSelectedImage] = useState();
 
@@ -63,15 +67,17 @@ function Frm() {
     });
 
   };
-  const success = () => {
-    message.success('Contact added successfully');
-  };
+  const message = (
+    <Message showIcon type={type} >
+      {type}: Contact added successfully.
+    </Message>
+  );
   return (
     <div className="h-[30rem] w-72 flex flex-col gap-2 justify-center items-center bg-[#070556] mb-6 md:w-96">
       <p className="font-bold text-white font-myfont">Add Contact</p>
       <form
         onSubmit={handleSubmit}
-        onSubmitCapture={()=>success()}
+        onSubmitCapture={() => toaster.push(message, {placement})}
         className="w-11/12 flex flex-col gap-y-2"
         encType="multipart/form-data"
       >

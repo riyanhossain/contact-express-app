@@ -4,12 +4,14 @@ import { MdPhone } from "react-icons/md";
 import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 
 function Cards(props) {
+  const { contact } = props;
+  const { name, email, phone, location, avatar, igIdLink, fbIdLink, twIdLink, occupation , quote } = contact;
   return (
     <div className="flex flex-col bg-slate-300 h-96 w-72 rounded-lg overflow-hidden ">
       <div className="h-3/6  flex flex-col ">
         <div className=" h-2/3 bg-[#2825D1]  overflow-hidden w-full flex justify-center items-end">
           <img
-            src="https://source.unsplash.com/sTORW_4vrwg"
+            src={avatar}
             alt=""
             className="rounded-full h-24 w-24 object-cover border-slate-300 border-2 animate-bounce"
           />
@@ -18,9 +20,9 @@ function Cards(props) {
           <ul>
             <li className="flex gap-x-1 justify-center items-center">
               <p className="font-myfont text-sm text-[#2825D1] font-medium">
-                Riyan Hossain,{" "}
+                {name},
                 <span className="text-xs italic font-myfont">
-                  Software Engineer
+                  {occupation}
                 </span>
               </p>
             </li>
@@ -29,7 +31,7 @@ function Cards(props) {
                 <CgMail className="text-[#2825D1]" />
               </label>
               <p className="  font-myfont text-xs text-[#2825D1] font-medium">
-                riyan@gmail.com
+                {email}
               </p>
             </li>
             <li className="flex gap-x-1 justify-center items-center">
@@ -37,7 +39,7 @@ function Cards(props) {
                 <MdPhone className="text-[#2825D1]" />
               </label>
               <p className="font-myfont text-xs font-medium text-[#2825D1]">
-                01711-123456
+                {phone}
               </p>
             </li>
           </ul>
@@ -46,9 +48,7 @@ function Cards(props) {
       <div className="h-3/6 flex flex-col justify-between items-center">
         <div className="w-11/12 flex justify-center items-center">
           <p className="text-sm italic text-[#2825D1] font-myfont">
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum
-            deleniti dignissimos iusto cupiditate tempora dolorem, ipsam est
-            debitis quam non!"
+            {quote}
           </p>
         </div>
         <div className="flex gap-x-4 bg-[#2825D1] w-full p-3 justify-center items-center">

@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Cards from "./Cards";
 import Frm from "./Frm";
 import axios from "axios";
+import { ContactsContext } from "../../App";
+
 
 function Home() {
+  
   const [page, setPage] = useState(1);
-  const [contactsInfo, setContactsInfo] = useState(false);
+
+  const [contactsInfo, setContactsInfo] = useContext(ContactsContext);
   const getContacts = async () => {
     try {
       const data = await axios.get(`http://localhost:5000/api/contacts?page=${page}`);
@@ -15,11 +19,14 @@ function Home() {
       console.log(err);
     }
   };
+
   useEffect(() => {
+
     getContacts();
   }, [page]);
   const { message, contacts, totalPages } = contactsInfo;
   console.log(contactsInfo);
+  console.log(page)
   const pagearr = () => {
     let arr = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -47,7 +54,7 @@ function Home() {
         <div className="flex justify-center items-center gap-x-4 mb-6">
           {
             pagearr().map((page) => (
-              <button className="bg-[#2825D1] w-8 h-6 text-white font-myfont font-semibold" onClick={()=>setPage(page)}>{page}</button>
+              <button className="bg-[#2825D1] w-8 h-6 text-white font-myfont font-semibold" onClick={()=>setPage(page)} key={page}>{page}</button>
             ))
           }
         </div>

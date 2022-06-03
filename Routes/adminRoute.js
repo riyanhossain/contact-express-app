@@ -3,8 +3,8 @@ const router = express.Router();
 const createadmin = require("../controllers/createAdmin");
 const authAdmin = require("../controllers/authAdmin");
 
-router.post('/login', createadmin)
+router.post('/createadmin', createadmin)
 
-router.get('/login', authAdmin)
+router.post('/login', authAdmin)
 
 module.exports = router;

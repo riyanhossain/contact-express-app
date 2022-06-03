@@ -12,7 +12,9 @@ const search =  async (req, res) => {
         if(contacts.length > 0){
             res.status(200).json({
                 message: "Contacts fetched successfully",
-                contacts: contacts
+                contacts: contacts,
+                totalPages: contacts.totalPages,
+
             });
         }else{
             res.status(404).json({

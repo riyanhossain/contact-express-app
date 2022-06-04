@@ -95,4 +95,24 @@ const updateContacts = async (req, res) => {
   }
 };
 
-module.exports = { postContacts, getContacts, deleteContacts, updateContacts };
+const allContacts = async (req, res) => {
+  try {
+    const contacts = await contact.find();
+    if (!contacts) {
+      res.status(404).json({
+        message: "Contact not found",
+      });
+    } else {
+      res.status(200).json({
+        message: "Contacts fetched successfully",
+        contacts: contacts,
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
+module.exports = { postContacts, getContacts, deleteContacts, updateContacts , allContacts };

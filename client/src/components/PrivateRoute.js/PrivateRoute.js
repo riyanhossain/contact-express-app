@@ -5,9 +5,8 @@ function PrivateRoute(){
 
     const admin=JSON.parse(localStorage.getItem('admin'));
 
-  return (
-    admin?.Admin ? <Outlet/> : <Navigate to="/login"/>
-  )
+  return admin?.Admin ? <Outlet/> : <Navigate to="/login"/>
+  
 }
 
 export default PrivateRoute;

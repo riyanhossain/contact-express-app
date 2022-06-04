@@ -7,9 +7,9 @@ function Cards(props) {
   const { contact } = props;
   const { name, email, phone, location, avatar, igIdLink, fbIdLink, twIdLink, occupation , quote } = contact;
   return (
-    <div className="flex flex-col bg-slate-300 h-96 w-72 rounded-lg overflow-hidden ">
+    <div className="flex flex-col bg-blue-200 h-96 w-72 rounded-lg overflow-hidden ">
       <div className="h-3/6  flex flex-col ">
-        <div className=" h-2/3 bg-[#2825D1]  overflow-hidden w-full flex justify-center items-end">
+        <div className=" h-2/3 bg-blue-500  overflow-hidden w-full flex justify-center items-end">
           <img
             src={avatar}
             alt=""
@@ -51,7 +51,7 @@ function Cards(props) {
             {quote}
           </p>
         </div>
-        <div className="flex gap-x-4 bg-[#2825D1] w-full p-3 justify-center items-center">
+        <div className="flex gap-x-4 bg-blue-500 w-full p-3 justify-center items-center">
           <a
             href="https://www.facebook.com/riyan.hossain.9"
             target="_blank"

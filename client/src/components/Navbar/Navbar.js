@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ContactsContext } from "../../App";
+import { AdminsContext, ContactsContext } from "../../App";
 
 function Navbar() {
   const [contactsInfo, setContactsInfo] = useContext(ContactsContext);
   const [newContacts, setNewContacts] = useState(false);
+  const [admin, setAdmin] = useContext(AdminsContext);
 
   useEffect(() => {
     const getContacts = async () => {
@@ -20,7 +21,7 @@ function Navbar() {
       }
     };
     getContacts();
-  }, []);
+  }, [contactsInfo]);
   const handleInputs = (e) => {
     let name = e.target.value;
     if (name.length >= 1) {
@@ -32,15 +33,19 @@ function Navbar() {
       setContactsInfo(newContacts);
     }
     // console.log(newContacts);
-    console.log(name.length);
   };
   return (
-    <section className="bg-[#2825D1] w-screen flex flex-col justify-center items-center h-[4rem]">
+    <section className="bg-blue-400 w-screen flex flex-col justify-center items-center h-[4rem]">
       <nav className="w-11/12">
         <ul className="flex justify-between items-center">
           <li className="p-4">
-            <label >
-              <Link to="/" className="font-bold text-white font-tailfont hover:text-white">ContactME</Link>
+            <label>
+              <Link
+                to="/"
+                className="font-bold text-white font-tailfont hover:text-white"
+              >
+                ContactME
+              </Link>
             </label>
           </li>
           <li className="flex items-center">
@@ -52,12 +57,26 @@ function Navbar() {
             />
           </li>
           <ul className="flex gap-x-4">
-            <li >
-              <Link to="/admin" className="text-white font-tailfont"> Admin </Link>
+            <li>
+              <Link to="/admin" className="text-white font-tailfont">
+                {" "}
+                Admin{" "}
+              </Link>
             </li>
             <li className="hidden  text-white font-tailfont  md:block lg:block">
-              <Link to="/" className=" text-white font-tailfont"> Home </Link>
+              <Link to="/" className=" text-white font-tailfont">
+                {" "}
+                Home{" "}
+              </Link>
             </li>
+            {admin?.Admin && (
+              <li className="text-white font-tailfont  md:block lg:block">
+                <Link to="/" className=" text-white font-tailfont" onClick={()=> setAdmin({Admin : false})}>
+                  {" "}
+                  Logout{" "}
+                </Link>
+              </li>
+            )}
           </ul>
         </ul>
       </nav>

@@ -73,7 +73,7 @@ function Frm() {
     </Message>
   );
   return (
-    <div className="h-[30rem] w-72 flex flex-col gap-2 justify-center items-center bg-[#070556] mb-6 md:w-96">
+    <div className="h-[30rem] w-72 flex flex-col gap-2 justify-center items-center bg-blue-600 mb-6 md:w-96">
       <p className="font-bold text-white font-myfont">Add Contact</p>
       <form
         onSubmit={handleSubmit}

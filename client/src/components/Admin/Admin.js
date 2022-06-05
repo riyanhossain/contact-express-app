@@ -20,7 +20,6 @@ function Admin() {
 
     getAllContacts();
   }, [allContacts]);
-  console.log(contacts);
   return (
     <section className="flex gap-6 my-6 flex-wrap justify-center items-center">
       {allContacts &&

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Message, toaster } from 'rsuite';
-import 'rsuite/dist/rsuite.min.css';
+import { Message, toaster } from "rsuite";
+import "rsuite/dist/rsuite.min.css";
 
+function UpdateForm(props) {
 
+  const { contact } = props;
+  const [form, setForm] = useState(contact);
+  const [type, setType] = React.useState("success");
+  const [placement, setPlacement] = React.useState("topCenter");
 
-function Frm() {
-  const [type, setType] = React.useState('success');
-  const [placement, setPlacement] = React.useState('topCenter');
-
-  const [form, setForm] = useState({});
-  const [selectedImage, setSelectedImage] = useState();
+  const [selectedImage, setSelectedImage] = useState(false);
 
   const uploadImage = (e) => {
     setSelectedImage(e.target.files[0]);
@@ -18,7 +18,6 @@ function Frm() {
     console.log(selectedImage);
   };
   const handleInputs = (e) => {
-    form.permission = false;
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -31,7 +30,7 @@ function Frm() {
     formdata.append("email", form.email);
     formdata.append("phone", form.phone);
     formdata.append("location", form.location);
-    formdata.append("avatar", selectedImage);
+    selectedImage && formdata.append("avatar", selectedImage);
     formdata.append("igIdLink", form.igIdLink);
     formdata.append("fbIdLink", form.fbIdLink);
     formdata.append("twIdLink", form.twIdLink);
@@ -39,19 +38,41 @@ function Frm() {
     formdata.append("quote", form.quote);
     formdata.append("permission", form.permission);
 
-    console.log(form);
-    axios
-      .post("http://localhost:5000/api/contacts", formdata, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+    selectedImage ? (
+      axios
+      .put(
+        `http://localhost:5000/api/contacts/updatecontact/${contact._id}`,
+        formdata,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+    ) : (
+      axios
+      .patch(
+        `http://localhost:5000/api/contacts/updatecontactbody/${contact._id}`,
+        form,
+        // {
+        //   headers: {
+        //     "Content-Type": "multipart/form-data",
+        //   },
+        // }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    )
     setForm({
       name: "",
       email: "",
@@ -65,19 +86,18 @@ function Frm() {
       quote: "",
       permission: "",
     });
-
   };
   const message = (
-    <Message showIcon type={type} >
-      {type}: Contact added successfully.
+    <Message showIcon type={type}>
+      {type}: Contact updated successfully.
     </Message>
   );
   return (
     <div className="h-[30rem] w-72 flex flex-col gap-2 justify-center items-center bg-blue-600 mb-6 md:w-96">
-      <p className="font-bold text-white font-myfont">Add Contact</p>
+      <p className="font-bold text-white font-myfont">Update Contact</p>
       <form
         onSubmit={handleSubmit}
-        onSubmitCapture={() => toaster.push(message, {placement})}
+        onSubmitCapture={() => toaster.push(message, { placement })}
         className="w-11/12 flex flex-col gap-y-2"
         encType="multipart/form-data"
       >
@@ -88,7 +108,6 @@ function Frm() {
           className="text-white font-myfont text-sm w-full"
           accept="image/png, image/jpeg, image/jpg"
           onChange={uploadImage}
-          required
         />
         <input
           type="text"
@@ -180,4 +199,4 @@ function Frm() {
   );
 }
 
-export default Frm;
+export default UpdateForm;

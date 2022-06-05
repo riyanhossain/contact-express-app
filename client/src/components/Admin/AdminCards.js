@@ -1,9 +1,14 @@
 import axios from "axios";
 import React from "react";
-import { Message, toaster } from "rsuite";
+import { BsDisplay } from "react-icons/bs";
+import { Message, Modal, toaster } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
+import UpdateForm from "./UpdateForm";
 
 function AdminCards(props) {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [type, setType] = React.useState("success");
   const [placement, setPlacement] = React.useState("topCenter");
   const message = (value) => (
@@ -15,21 +20,30 @@ function AdminCards(props) {
   const { contact } = props;
   const {
     name,
-    email,
+
     phone,
-    location,
+
     avatar,
-    igIdLink,
-    fbIdLink,
-    twIdLink,
+
     occupation,
-    quote,
+
+    permission,
   } = contact;
 
   const deleteContact = async () => {
     try {
       await axios.delete(
         `http://localhost:5000/api/contacts/delete/${contact._id}`
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const updatePermission = async () => {
+    try {
+      await axios.patch(
+        `http://localhost:5000/api/updatepermission/${contact._id}`,
+        { permission: !permission }
       );
     } catch (err) {
       console.log(err);
@@ -83,16 +97,30 @@ function AdminCards(props) {
             </button>
             <button
               className="py-2 bg-yellow-500 text-white font-myfont w-24"
-              onClick={() => toaster.push(message("updeted"), { placement })}
+              onClick={handleOpen}
             >
               Update
             </button>
-            <button
-              className="py-2 bg-green-700 text-white font-myfont w-24"
-              onClick={() => toaster.push(message("approved"), { placement })}
-            >
-              Approve
-            </button>
+            <Modal open={open} onClose={handleClose} style={ {verticalAlign: 'middle'}}>
+              <Modal.Body>
+                <UpdateForm contact={contact} />
+              </Modal.Body>
+            </Modal>
+            {permission ? (
+              <button className="py-2 bg-green-700 text-white font-myfont w-24">
+                Approved
+              </button>
+            ) : (
+              <button
+                className="py-2 border-green-700 border-2 text-green-700 font-myfont w-24"
+                onClick={updatePermission}
+                onClickCapture={() =>
+                  toaster.push(message("approved"), { placement })
+                }
+              >
+                Approve
+              </button>
+            )}
           </div>
         </div>
       </div>

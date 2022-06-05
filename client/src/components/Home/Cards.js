@@ -7,7 +7,7 @@ function Cards(props) {
   const { contact } = props;
   const { name, email, phone, location, avatar, igIdLink, fbIdLink, twIdLink, occupation , quote } = contact;
   return (
-    <div className="flex flex-col bg-blue-200 h-96 w-72 rounded-lg overflow-hidden ">
+    <div className="flex flex-col bg-blue-200 h-96 w-72  overflow-hidden ">
       <div className="h-3/6  flex flex-col ">
         <div className=" h-2/3 bg-blue-500  overflow-hidden w-full flex justify-center items-end">
           <img

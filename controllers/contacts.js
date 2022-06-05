@@ -95,6 +95,26 @@ const updateContacts = async (req, res) => {
   }
 };
 
+const updateContactsBody = async (req, res) => {
+  try {
+    console.log(req.body);
+    const contacts = await contact.findByIdAndUpdate(req.params.id, req.body);
+    if (!contacts) {
+      res.status(404).json({
+        message: "Contact not found",
+      });
+    } else {
+      res.status(200).json({
+        message: "Contact updated successfully",
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
 const allContacts = async (req, res) => {
   try {
     const contacts = await contact.find();
@@ -115,4 +135,23 @@ const allContacts = async (req, res) => {
   }
 };
 
-module.exports = { postContacts, getContacts, deleteContacts, updateContacts , allContacts };
+const updatePermission = async (req, res) => {
+  try {
+    const contacts = await contact.findByIdAndUpdate(req.params.id, req.body);
+    if (!contacts) {
+      res.status(404).json({
+        message: "Contact not found",
+      });
+    } else {
+      res.status(200).json({
+        message: "Contact updated successfully",
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+}
+
+module.exports = { postContacts, getContacts, deleteContacts, updateContacts , allContacts, updatePermission, updateContactsBody};

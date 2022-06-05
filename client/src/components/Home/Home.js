@@ -21,9 +21,18 @@ function Home() {
   };
 
   useEffect(() => {
+    const getContacts = async () => {
+      try {
+        const data = await axios.get(`http://localhost:5000/api/contacts?page=${page}`);
+  
+        setContactsInfo(data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
     getContacts();
-  }, [page]);
+  }, []);
   const { message, contacts, totalPages } = contactsInfo;
   console.log(contactsInfo);
   console.log(page)
@@ -45,7 +54,7 @@ function Home() {
       <section className="w-4/6 flex flex-wrap justify-center gap-6 ">
         {contactsInfo && 
           contacts.map((contact) => (
-            <Cards key={contact._id} contact={contact} />
+            contact.permission && <Cards key={contact._id} contact={contact} />
           ))
         }
       </section>

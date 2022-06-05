@@ -5,7 +5,7 @@ import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 
 function Cards(props) {
   const { contact } = props;
-  const { name, email, phone, location, avatar, igIdLink, fbIdLink, twIdLink, occupation , quote } = contact;
+  const { name, email, phone, avatar, occupation , quote } = contact;
   return (
     <div className="flex flex-col bg-blue-200 h-96 w-72  overflow-hidden ">
       <div className="h-3/6  flex flex-col ">
@@ -47,7 +47,7 @@ function Cards(props) {
       </div>
       <div className="h-3/6 flex flex-col justify-between items-center">
         <div className="w-11/12 flex justify-center items-center">
-          <p className="text-sm italic text-[#2825D1] font-myfont">
+          <p className="text-sm italic text-[#2825D1] font-myfont whitespace-pre-wrap">
             {quote}
           </p>
         </div>

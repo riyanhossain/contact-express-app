@@ -69,7 +69,7 @@ function Frm() {
   };
   const message = (
     <Message showIcon type={type} >
-      {type}: Contact added successfully.
+      {type}: Contact added successfully. Waiting for aprroval.
     </Message>
   );
   return (

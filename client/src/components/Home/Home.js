@@ -10,15 +10,6 @@ function Home() {
   const [page, setPage] = useState(1);
 
   const [contactsInfo, setContactsInfo] = useContext(ContactsContext);
-  const getContacts = async () => {
-    try {
-      const data = await axios.get(`http://localhost:5000/api/contacts?page=${page}`);
-
-      setContactsInfo(data.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   useEffect(() => {
     const getContacts = async () => {
@@ -34,8 +25,6 @@ function Home() {
     getContacts();
   }, []);
   const { message, contacts, totalPages } = contactsInfo;
-  console.log(contactsInfo);
-  console.log(page)
   const pagearr = () => {
     let arr = [];
     for (let i = 1; i <= totalPages; i++) {

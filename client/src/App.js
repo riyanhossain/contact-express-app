@@ -12,10 +12,10 @@ import PrivateRoute from "./components/PrivateRoute.js/PrivateRoute";
 export const ContactsContext = createContext();
 export const AdminsContext = createContext();
 function App() {
-  const [admin, setAdmin] = useState({ Admin: true });
+
+  let [admin, setAdmin] = useState({ Admin: false });
   localStorage.setItem("admin", JSON.stringify(admin));
   const [ContactsInfo, setContactsInfo] = useState(false);
-  console.log(admin);
   return (
     <ContactsContext.Provider value={[ContactsInfo, setContactsInfo]}>
       <AdminsContext.Provider value={[admin, setAdmin]}>

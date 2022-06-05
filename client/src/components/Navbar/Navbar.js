@@ -8,23 +8,27 @@ function Navbar() {
   const [newContacts, setNewContacts] = useState(false);
   const [admin, setAdmin] = useContext(AdminsContext);
 
+
   useEffect(() => {
     const getContacts = async () => {
       try {
         const data = await axios.get(
           `http://localhost:5000/api/contacts?page=${contactsInfo.prevPage + 1}`
         );
-
+  
         setNewContacts(data.data);
       } catch (err) {
         console.log(err);
       }
     };
+
     getContacts();
   }, [contactsInfo]);
+  console.log(contactsInfo);
+  console.log(newContacts);
   const handleInputs = (e) => {
     let name = e.target.value;
-    if (name.length >= 1) {
+    if (name.length > 0) {
       const filtered = contactsInfo.contacts.filter((contact) =>
         contact.name.toLowerCase().includes(name.toLowerCase())
       );
@@ -71,7 +75,10 @@ function Navbar() {
             </li>
             {admin?.Admin && (
               <li className="text-white font-tailfont  md:block lg:block">
-                <Link to="/" className=" text-white font-tailfont" onClick={()=> setAdmin({Admin : false})}>
+                <Link to="/" className=" text-white font-tailfont" onClick={()=> {
+                  setAdmin({Admin : false});
+                  localStorage.setItem('admin', {Admin : false});
+                  }}>
                   {" "}
                   Logout{" "}
                 </Link>

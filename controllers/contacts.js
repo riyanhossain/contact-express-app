@@ -97,7 +97,6 @@ const updateContacts = async (req, res) => {
 
 const updateContactsBody = async (req, res) => {
   try {
-    console.log(req.body);
     const contacts = await contact.findByIdAndUpdate(req.params.id, req.body);
     if (!contacts) {
       res.status(404).json({

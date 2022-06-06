@@ -9,6 +9,8 @@ function Home() {
   
   const [page, setPage] = useState(1);
 
+  console.log(page)
+
   const [contactsInfo, setContactsInfo] = useContext(ContactsContext);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ function Home() {
     };
 
     getContacts();
-  }, []);
+  }, [page]);
   const { message, contacts, totalPages } = contactsInfo;
   const pagearr = () => {
     let arr = [];

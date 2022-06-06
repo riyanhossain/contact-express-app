@@ -39,7 +39,6 @@ function Frm() {
     formdata.append("quote", form.quote);
     formdata.append("permission", form.permission);
 
-    console.log(form);
     axios
       .post("http://localhost:5000/api/contacts", formdata, {
         headers: {

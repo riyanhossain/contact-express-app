@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AdminsContext } from "../../App";
 
 function Login() {
+
+  const navigate = useNavigate();
     const [admin , setAdmin] = useContext(AdminsContext);
     const [inputs, setInputs] = useState({});
     const handleInputs = (e) => {
@@ -19,6 +22,7 @@ function Login() {
             localStorage.setItem("admin", JSON.stringify(res.data));
             setAdmin(res.data);
             console.log(JSON.parse(localStorage.getItem('admin')));
+            navigate("/admin");
         }
         catch(err){
             console.log(err);
